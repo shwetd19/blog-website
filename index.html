@@ -7,7 +7,26 @@
     <title>Blog website</title>
 
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet" />
+    <!-- <link href="style.css" rel="stylesheet" /> -->
+    <style>
+      .spinner-wrapper {
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s;
+      }
+      .spinner-border {
+        height: 60px;
+        width: 60px;
+      }
+    </style>
   </head>
   <body>
     <div class="spinner-wrapper">
@@ -38,7 +57,7 @@
 
       <!-- Main tag used -->
       <main class="container">
-        <div class=" p-4 p-5 mb-5 text-bg-dark">
+        <div class="p-4 p-5 mb-5 text-bg-dark">
           <div class="col-md-6 px-0">
             <!-- display-4 for  the big font than fs-1 for main headings-->
             <h1 class="display-5 fst-italic fw-bold">
@@ -142,9 +161,18 @@
         </p>
         <p><a href="/">Back to top</a></p>
         <div class="loader"></div>
-        
       </footer>
     </div>
-    <script type="text/javascript" src="loader.js"></script>
+    <script>
+      const spinnerWrapperEl = document.querySelector(".spinner-wrapper");
+
+      window.addEventListener("load", () => {
+        spinnerWrapperEl.style.opacity = "0";
+
+        setTimeout(() => {
+          spinnerWrapperEl.style.display = "none";
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
