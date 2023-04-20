@@ -9,29 +9,51 @@
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
     <!-- <link href="style.css" rel="stylesheet" /> -->
     <style>
-      .spinner-wrapper {
-        background-color: #000;
+      #loader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 9999;
+        background-color: #000;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: all 0.3s;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.1s ease-out;
       }
-      .spinner-border {
-        height: 60px;
-        width: 60px;
+
+      #loader img {
+        width: 1000px;
+        height: 1000px;
+        animation: spin 5s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hidden {
+        opacity: 0;
+        transition: opacity 0.1s ease-in;
+        pointer-events: none;
       }
     </style>
   </head>
   <body>
-    <div class="spinner-wrapper">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div id="loader">
+      <div class="text-center">
+        <img
+          src="loader.jpg"
+          alt="Website Logo"
+          class="rounded mx-auto d-block"
+        />
       </div>
     </div>
 
@@ -164,14 +186,17 @@
       </footer>
     </div>
     <script>
-      const spinnerWrapperEl = document.querySelector(".spinner-wrapper");
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        const content = document.getElementById("content");
 
-      window.addEventListener("load", () => {
-        spinnerWrapperEl.style.opacity = "0";
-
-        setTimeout(() => {
-          spinnerWrapperEl.style.display = "none";
-        }, 3000);
+        setTimeout(function () {
+          loader.style.opacity = "0";
+          setTimeout(function () {
+            loader.style.display = "none";
+            content.classList.remove("hidden");
+          }, 1000);
+        }, 5000);
       });
     </script>
   </body>
